@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MonthView">
+    	<attr name="month" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="MonthWeekDayView">
+    	<attr name="monthDay" format="integer"/>  
+    	<attr name="weekDay" format="integer"/>  
+    </declare-styleable>
+    <declare-styleable name="ClassView">
+    	<attr name="classNum" format="integer"/>  
+    </declare-styleable>
+</resources>

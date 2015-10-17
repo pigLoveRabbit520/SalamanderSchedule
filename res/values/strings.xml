@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">蜜蜂课程表</string>
+    <string name="action_settings">Settings</string>
+    <string name="settings">设置</string>
+    <string name="exit">退出</string>
+    <string name="account">账号：</string>
+    <string name="password">密码：</string>
+    <string name="query_type">查询方式：</string>
+    <string name="year">学年</string>
+    <string name="term">学期</string>
+    <string name="login">登&#160;&#160;&#160;录</string>
+    <string name="associator_detail">会员详细信息</string>
+    <string name="title_setting">请设置标题</string>
+    <string name="title_query_result">会员查询结果</string>
+    <string name="query_associator_num">总共查找到***位会员</string>
+    <string name="progress_title">会员查询</string>
+    <string name="progress_message">正在从服务器上获取信息&#8230;\n</string>
+    <string name="btn_parse">解  析</string>
+    <string name="btn_fetch">抓  取</string>
+	<string name="grade_query">成绩查询</string>
+	<string name="lesson_query">课表查询</string>
+	<string name="query_result">查询结果</string>
+	<string name="please_select_term">请选择学期</string>
+	<string name="please_select_year">请选择学年</string>
+	<string name="please_select_type">请选择查询方式</string>
+	<string-array name="grade_query_type">
+	    <item>按学期查询</item>
+	     <item>按学年查询</item>
+	</string-array>
+</resources>

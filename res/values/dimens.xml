@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+	<dimen name="monthWeekDayView_top_margin">3dp</dimen>
+	<dimen name="monthWeekDayView_text_size">12sp</dimen>
+	<dimen name="monthView_left_right_padding">3dp</dimen>
+	<!-- 右边周数的内补 -->
+	<dimen name="timetable_right_weekday_padding">2dp</dimen>
+	<!-- 底部节数的内补 -->
+	<dimen name="timetable_bottom_class_padding">2dp</dimen>
+	<dimen name="titlebar_padding">6dp</dimen>
+	<dimen name="settings_right_padding">10dp</dimen>
+	<dimen name="titlebar_text_size">16sp</dimen>
+	<dimen name="titlebar_height">40dp</dimen>
+	<dimen name="lessonView_text_size">13sp</dimen>
+	<dimen name="lessonView_corner_size">3dp</dimen>
+	<dimen name="lessonView_padding">1.5dp</dimen>
+</resources>

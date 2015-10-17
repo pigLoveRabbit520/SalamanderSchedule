@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="transparent">#00000000</color>
+    <color name="deep_blue">#5996d3</color>
+    <color name="titlebar_bakc_color">#f7f7f7</color>
+    <color name="titlebar_bottom_linn_color">#cfcfcf</color>
+    <color name="not_this_week_back_color">#3fa5a5a5</color>
+    <color name="add_lesson_back_color">#4Da0a0a0</color>
+    <color name="btn_parse_normal">#98ba27</color>
+    <color name="btn_parse_unenabled">#d3d3d3</color>
+    <color name="btn_parse_press">#a6cc2b</color>
+    <color name="light_blue">#18b4ed</color>
+    
+    <!-- 课程块内置背景颜色 -->
+    <color name="lessonView_inner_bg_color1">#7fe63447</color>
+    <color name="lessonView_inner_bg_color2">#7f2ba3d4</color>
+    <color name="lessonView_inner_bg_color3">#7f8acd45</color>
+    <color name="lessonView_inner_bg_color4">#7fc58f31</color>
+    <color name="half_transparent_black">#7f000000</color>
+</resources>

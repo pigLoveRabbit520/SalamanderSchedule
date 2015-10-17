@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <shape>
+            <padding
+                android:bottom="@dimen/lessonView_padding"
+                android:left="@dimen/lessonView_padding"
+                android:right="@dimen/lessonView_padding"
+                android:top="@dimen/lessonView_padding" />
+        </shape>
+    </item>
+    <item>
+        <selector>
+            <item android:state_pressed="true">
+                <layer-list>
+                    <item>
+                        <shape>
+                            <corners
+                                android:bottomLeftRadius="@dimen/lessonView_corner_size"
+                                android:bottomRightRadius="@dimen/lessonView_corner_size"
+                                android:topLeftRadius="@dimen/lessonView_corner_size"
+                                android:topRightRadius="@dimen/lessonView_corner_size" />
+
+                            <solid android:color="@color/half_transparent_black" />
+                        </shape>
+                    </item>
+                    <item>
+                        <shape>
+                            <corners
+                                android:bottomLeftRadius="@dimen/lessonView_corner_size"
+                                android:bottomRightRadius="@dimen/lessonView_corner_size"
+                                android:topLeftRadius="@dimen/lessonView_corner_size"
+                                android:topRightRadius="@dimen/lessonView_corner_size" />
+
+                            <solid android:color="@color/lessonView_inner_bg_color2" />
+                        </shape>
+                    </item>
+                </layer-list>
+            </item>
+            <item>
+                <shape>
+                    <corners
+                        android:bottomLeftRadius="@dimen/lessonView_corner_size"
+                        android:bottomRightRadius="@dimen/lessonView_corner_size"
+                        android:topLeftRadius="@dimen/lessonView_corner_size"
+                        android:topRightRadius="@dimen/lessonView_corner_size" />
+
+                    <solid android:color="@color/lessonView_inner_bg_color2" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+
+</layer-list>
