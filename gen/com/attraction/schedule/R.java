@@ -75,9 +75,9 @@ containing a value of this type.
          */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
-        public static final int lessonView_corner_size=0x7f05000c;
-        public static final int lessonView_padding=0x7f05000d;
-        public static final int lessonView_text_size=0x7f05000b;
+        public static final int lesson_view_corner_size=0x7f05000c;
+        public static final int lesson_view_padding=0x7f05000d;
+        public static final int lesson_view_text_size=0x7f05000b;
         public static final int monthView_left_right_padding=0x7f050004;
         public static final int monthWeekDayView_text_size=0x7f050003;
         public static final int monthWeekDayView_top_margin=0x7f050002;
