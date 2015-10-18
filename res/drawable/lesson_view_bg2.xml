@@ -4,10 +4,10 @@
     <item>
         <shape>
             <padding
-                android:bottom="@dimen/lessonView_padding"
-                android:left="@dimen/lessonView_padding"
-                android:right="@dimen/lessonView_padding"
-                android:top="@dimen/lessonView_padding" />
+                android:bottom="@dimen/lesson_view_padding"
+                android:left="@dimen/lesson_view_padding"
+                android:right="@dimen/lesson_view_padding"
+                android:top="@dimen/lesson_view_padding" />
         </shape>
     </item>
     <item>
@@ -17,10 +17,10 @@
                     <item>
                         <shape>
                             <corners
-                                android:bottomLeftRadius="@dimen/lessonView_corner_size"
-                                android:bottomRightRadius="@dimen/lessonView_corner_size"
-                                android:topLeftRadius="@dimen/lessonView_corner_size"
-                                android:topRightRadius="@dimen/lessonView_corner_size" />
+                                android:bottomLeftRadius="@dimen/lesson_view_corner_size"
+                                android:bottomRightRadius="@dimen/lesson_view_corner_size"
+                                android:topLeftRadius="@dimen/lesson_view_corner_size"
+                                android:topRightRadius="@dimen/lesson_view_corner_size" />
 
                             <solid android:color="@color/half_transparent_black" />
                         </shape>
@@ -28,12 +28,12 @@
                     <item>
                         <shape>
                             <corners
-                                android:bottomLeftRadius="@dimen/lessonView_corner_size"
-                                android:bottomRightRadius="@dimen/lessonView_corner_size"
-                                android:topLeftRadius="@dimen/lessonView_corner_size"
-                                android:topRightRadius="@dimen/lessonView_corner_size" />
+                                android:bottomLeftRadius="@dimen/lesson_view_corner_size"
+                                android:bottomRightRadius="@dimen/lesson_view_corner_size"
+                                android:topLeftRadius="@dimen/lesson_view_corner_size"
+                                android:topRightRadius="@dimen/lesson_view_corner_size" />
 
-                            <solid android:color="@color/lessonView_inner_bg_color2" />
+                            <solid android:color="@color/lesson_view_inner_bg_color2" />
                         </shape>
                     </item>
                 </layer-list>
@@ -41,12 +41,12 @@
             <item>
                 <shape>
                     <corners
-                        android:bottomLeftRadius="@dimen/lessonView_corner_size"
-                        android:bottomRightRadius="@dimen/lessonView_corner_size"
-                        android:topLeftRadius="@dimen/lessonView_corner_size"
-                        android:topRightRadius="@dimen/lessonView_corner_size" />
+                        android:bottomLeftRadius="@dimen/lesson_view_corner_size"
+                        android:bottomRightRadius="@dimen/lesson_view_corner_size"
+                        android:topLeftRadius="@dimen/lesson_view_corner_size"
+                        android:topRightRadius="@dimen/lesson_view_corner_size" />
 
-                    <solid android:color="@color/lessonView_inner_bg_color2" />
+                    <solid android:color="@color/lesson_view_inner_bg_color2" />
                 </shape>
             </item>
         </selector>

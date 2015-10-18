@@ -14,7 +14,7 @@
 	<dimen name="settings_right_padding">10dp</dimen>
 	<dimen name="titlebar_text_size">16sp</dimen>
 	<dimen name="titlebar_height">40dp</dimen>
-	<dimen name="lessonView_text_size">13sp</dimen>
-	<dimen name="lessonView_corner_size">3dp</dimen>
-	<dimen name="lessonView_padding">1.5dp</dimen>
+	<dimen name="lesson_view_text_size">13sp</dimen>
+	<dimen name="lesson_view_corner_size">3dp</dimen>
+	<dimen name="lesson_view_padding">1.5dp</dimen>
 </resources>

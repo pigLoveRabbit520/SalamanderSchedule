@@ -55,10 +55,10 @@ containing a value of this type.
         public static final int half_transparent_black=0x7f040010;
         /**  课程块内置背景颜色 
          */
-        public static final int lessonView_inner_bg_color1=0x7f04000c;
-        public static final int lessonView_inner_bg_color2=0x7f04000d;
-        public static final int lessonView_inner_bg_color3=0x7f04000e;
-        public static final int lessonView_inner_bg_color4=0x7f04000f;
+        public static final int lesson_view_inner_bg_color1=0x7f04000c;
+        public static final int lesson_view_inner_bg_color2=0x7f04000d;
+        public static final int lesson_view_inner_bg_color3=0x7f04000e;
+        public static final int lesson_view_inner_bg_color4=0x7f04000f;
         public static final int light_blue=0x7f04000b;
         public static final int not_this_week_back_color=0x7f040006;
         public static final int titlebar_bakc_color=0x7f040004;
