@@ -8,6 +8,8 @@ import butterknife.ButterKnife.ViewBinder;
 public class MainActivity$$ViewBinder<T extends com.attraction.schedule.activity.MainActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
+    view = finder.findRequiredView(source, 2131361810, "field 'timetable'");
+    target.timetable = finder.castView(view, 2131361810, "field 'timetable'");
     view = finder.findRequiredView(source, 2131361808, "field 'tvSettings' and method 'onClick'");
     target.tvSettings = finder.castView(view, 2131361808, "field 'tvSettings'");
     view.setOnClickListener(
@@ -18,12 +20,10 @@ public class MainActivity$$ViewBinder<T extends com.attraction.schedule.activity
           target.onClick(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131361810, "field 'timetable'");
-    target.timetable = finder.castView(view, 2131361810, "field 'timetable'");
   }
 
   @Override public void unbind(T target) {
-    target.tvSettings = null;
     target.timetable = null;
+    target.tvSettings = null;
   }
 }

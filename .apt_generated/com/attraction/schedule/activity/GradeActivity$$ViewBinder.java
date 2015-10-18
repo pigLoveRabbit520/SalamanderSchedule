@@ -8,6 +8,12 @@ import butterknife.ButterKnife.ViewBinder;
 public class GradeActivity$$ViewBinder<T extends com.attraction.schedule.activity.GradeActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
+    view = finder.findRequiredView(source, 2131361795, "field 'spnTerm'");
+    target.spnTerm = finder.castView(view, 2131361795, "field 'spnTerm'");
+    view = finder.findRequiredView(source, 2131361794, "field 'spnYear'");
+    target.spnYear = finder.castView(view, 2131361794, "field 'spnYear'");
+    view = finder.findRequiredView(source, 2131361796, "field 'spnType'");
+    target.spnType = finder.castView(view, 2131361796, "field 'spnType'");
     view = finder.findRequiredView(source, 2131361797, "field 'btnQuery' and method 'onClick'");
     target.btnQuery = finder.castView(view, 2131361797, "field 'btnQuery'");
     view.setOnClickListener(
@@ -20,19 +26,13 @@ public class GradeActivity$$ViewBinder<T extends com.attraction.schedule.activit
       });
     view = finder.findRequiredView(source, 2131361798, "field 'lvGrade'");
     target.lvGrade = finder.castView(view, 2131361798, "field 'lvGrade'");
-    view = finder.findRequiredView(source, 2131361795, "field 'spnTerm'");
-    target.spnTerm = finder.castView(view, 2131361795, "field 'spnTerm'");
-    view = finder.findRequiredView(source, 2131361796, "field 'spnType'");
-    target.spnType = finder.castView(view, 2131361796, "field 'spnType'");
-    view = finder.findRequiredView(source, 2131361794, "field 'spnYear'");
-    target.spnYear = finder.castView(view, 2131361794, "field 'spnYear'");
   }
 
   @Override public void unbind(T target) {
+    target.spnTerm = null;
+    target.spnYear = null;
+    target.spnType = null;
     target.btnQuery = null;
     target.lvGrade = null;
-    target.spnTerm = null;
-    target.spnType = null;
-    target.spnYear = null;
   }
 }
