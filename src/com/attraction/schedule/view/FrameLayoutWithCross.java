@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.attraction.schedule.R;
 import com.attraction.schedule.activity.AddLessonActivity;
-import com.attraction.schedule.adapter.Lesson;
+import com.attraction.schedule.db.Lesson;
 import com.attraction.schedule.tool.DebugUtil;
 
 import android.content.Context;

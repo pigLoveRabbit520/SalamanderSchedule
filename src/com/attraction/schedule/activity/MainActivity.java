@@ -7,7 +7,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.attraction.schedule.R;
-import com.attraction.schedule.adapter.Lesson;
+import com.attraction.schedule.db.Lesson;
 import com.attraction.schedule.tool.ParseUtil;
 import com.attraction.schedule.view.Timetable;
 

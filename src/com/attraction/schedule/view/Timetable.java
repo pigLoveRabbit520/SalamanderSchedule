@@ -3,10 +3,13 @@ package com.attraction.schedule.view;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 import com.attraction.schedule.R;
-import com.attraction.schedule.adapter.Lesson;
+import com.attraction.schedule.db.Lesson;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

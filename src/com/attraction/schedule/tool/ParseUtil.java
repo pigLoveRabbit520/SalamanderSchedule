@@ -7,7 +7,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.attraction.schedule.adapter.Lesson;
+
+import com.attraction.schedule.db.Lesson;
 
 public class ParseUtil {
 	

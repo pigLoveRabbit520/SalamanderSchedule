@@ -1,8 +1,10 @@
 package com.attraction.schedule.view;
 
 import java.util.Random;
+
 import com.attraction.schedule.R;
-import com.attraction.schedule.adapter.Lesson;
+import com.attraction.schedule.db.Lesson;
+
 import android.content.Context;
 import android.view.Gravity;
 import android.widget.TextView;

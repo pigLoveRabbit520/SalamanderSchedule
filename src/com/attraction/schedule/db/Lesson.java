@@ -1,4 +1,4 @@
-package com.attraction.schedule.adapter;
+package com.attraction.schedule.db;
 
 import android.os.Parcel;
 import android.os.Parcelable;
