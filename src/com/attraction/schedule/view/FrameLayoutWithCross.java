@@ -1,10 +1,12 @@
 package com.attraction.schedule.view;
 
 import java.util.List;
+
 import com.attraction.schedule.R;
 import com.attraction.schedule.activity.AddLessonActivity;
 import com.attraction.schedule.adapter.Lesson;
 import com.attraction.schedule.tool.DebugUtil;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -29,6 +31,8 @@ public class FrameLayoutWithCross extends FrameLayout implements OnClickListener
 	private int strokeWidth = 2;
 	// 记录添加的addLessonBlock
 	private AddLessonView addLessonBlock = null;
+	// 记录action_down的位置
+	private BlockPosition positionOld = null;
 	
 	
 	public FrameLayoutWithCross(Context context) {
@@ -48,19 +52,28 @@ public class FrameLayoutWithCross extends FrameLayout implements OnClickListener
 	
 	/**
 	 * return true时，其他up,move才会发生
+	 * 调试发现一旦拖动了ScrollView之后，就会发生action_cancel事件
+	 * 之后的action_move和action_up都不会收到了
 	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO 自动生成的方法存根
-		DebugUtil.debug("BAO", "action " + event.toString());
+		boolean isConsumed = false;
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
 			if(addLessonBlock != null) {
 				removeAddLessonBlock();
 			}
 			int x = (int)event.getX();
 			int y = (int)event.getY();
+			positionOld = this.getPosition(x, y);
+			isConsumed = true;
+		} else if(event.getAction() == MotionEvent.ACTION_UP) {
+			int x = (int)event.getX();
+			int y = (int)event.getY();
 			BlockPosition position = this.getPosition(x, y);
-			if(position != null) {
+			if(positionOld != null && position != null && 
+					position.marginLeft == positionOld.marginLeft && 
+					position.marginTop == positionOld.marginTop) {
 				addLessonBlock = new AddLessonView(context);
 				FrameLayout.LayoutParams params = 
 						new FrameLayout.LayoutParams(position.width, position.height);
@@ -69,8 +82,10 @@ public class FrameLayoutWithCross extends FrameLayout implements OnClickListener
 				addLessonBlock.setOnClickListener(this);
 				this.addView(addLessonBlock);
 			}
+			isConsumed = true;
 		}
-		return true;
+		DebugUtil.debug("BAO", event.toString());
+		return isConsumed;
 	}
 	
 	/**
