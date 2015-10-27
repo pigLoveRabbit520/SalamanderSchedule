@@ -32,25 +32,21 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_top_corner_no_bottom_line"
-            android:padding="10dip" >
+            android:background="@drawable/shape_top_corner_no_bottom_line" >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dip"
+                style="@style/AccountPasswordTextStyle"
                 android:text="@string/account" >
             </TextView>
 
             <EditText
                 android:id="@+id/edtTxt_import_account"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_width="0dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@null"
                 android:inputType="number"
+                android:padding="10dip"
                 android:singleLine="true"
                 android:textSize="17sp" >
             </EditText>
@@ -60,32 +56,27 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_bottom_corner_no_top_line"
-            android:padding="10dip" >
+            android:background="@drawable/shape_bottom_corner_no_top_line" >
 
             <TextView
-                android:id="@+id/tv_course_tel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dip"
+                style="@style/AccountPasswordTextStyle"
                 android:text="@string/password" >
             </TextView>
 
             <EditText
                 android:id="@+id/edtTxt_import_password"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_width="0dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@null"
                 android:inputType="textPassword"
+                android:padding="10dip"
                 android:singleLine="true"
                 android:textSize="17sp" >
             </EditText>
         </TableRow>
     </TableLayout>
-    
+
     <Button
         android:id="@+id/btn_import_login"
         android:layout_width="match_parent"
@@ -120,29 +111,26 @@
             android:drawableTop="@drawable/grade"
             android:text="@string/grade_query" />
     </LinearLayout>
-    
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-         <ScrollView
-             android:id="@+id/sl_course"
-             android:layout_width="match_parent"
-             android:layout_height="50dp"
-             android:layout_alignParentBottom="true"
-             android:background="@color/light_blue" >
+        <ScrollView
+            android:id="@+id/sl_course"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/light_blue" >
 
-             <TextView
-                 android:id="@+id/tv_main_log"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginLeft="10dp"
-                 android:layout_marginRight="10dp"
-                 android:textColor="@color/white" />
-         </ScrollView>
-
-        </RelativeLayout>
-    
-    
+            <TextView
+                android:id="@+id/tv_main_log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white" />
+        </ScrollView>
+    </RelativeLayout>
 
 </LinearLayout>

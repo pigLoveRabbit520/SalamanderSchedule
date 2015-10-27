@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -50,4 +50,11 @@
         <item name="android:textSize">@dimen/lesson_view_text_size</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    
+     <style name="AccountPasswordTextStyle">
+         <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:paddingLeft">6dp</item>
+     </style>
 </resources>
