@@ -2,16 +2,20 @@ package com.attraction.schedule.activity;
 
 import java.sql.SQLException;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import com.attraction.schedule.R;
 import com.attraction.schedule.db.DatabaseHelper;
 import com.attraction.schedule.db.Lesson;
 import com.attraction.schedule.tool.ParseUtil;
+import com.attraction.schedule.view.OnComponentAddedCompletedListener;
 import com.attraction.schedule.view.Timetable;
 import com.j256.ormlite.android.AndroidDatabaseConnection;
 import com.j256.ormlite.dao.Dao;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,7 +25,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnComponentAddedCompletedListener {
 	@Bind(R.id.tv_main_settings)
 	TextView tvSettings;
 	@Bind(R.id.timetable_main)
@@ -41,23 +45,20 @@ public class MainActivity extends Activity {
 	}
 	
 	@Override
-	protected void onResume() {
-		// TODO 自动生成的方法存根
-		super.onResume();
-//		new Thread(new Runnable() {
-//			@Override
-//			public void run() {
-//				try {
-//					lessonDao = dbHelper.getLessonDao();
-//					lessons = lessonDao.queryForAll();
-//					handler.sendEmptyMessage(GET_LESSONS);
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}).start();
+	public void complete() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					lessonDao = dbHelper.getLessonDao();
+					lessons = lessonDao.queryForAll();
+					handler.sendEmptyMessage(GET_LESSONS);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
-
 	
 	@SuppressLint("HandlerLeak")
 	Handler handler = new Handler() {
@@ -94,21 +95,15 @@ public class MainActivity extends Activity {
 				ParseUtil util = new ParseUtil();
 				lessons = util.parseLesson(html);
 				timetable.addLessons(lessons);
-				try {
-					AndroidDatabaseConnection db = new AndroidDatabaseConnection(
-							dbHelper.getSqLiteDatabase(), true);
-					db.setAutoCommit(false);
-					for (Lesson lesson : lessons) {
-							lessonDao.create(lesson);
+				for (Lesson lesson : lessons) {
+					try {
+						lessonDao.create(lesson);
+					} catch (SQLException e) {
+						// TODO 自动生成的 catch 块
+						e.printStackTrace();
 					}
-					db.commit(null);
-				} catch (SQLException e) {
-					// TODO 自动生成的 catch 块
-					e.printStackTrace();
 				}
 			}
 		}
 	}
-
-	
 }

@@ -39,6 +39,7 @@ public class Timetable extends LinearLayout {
 	private static int weekDayNum = 7;
 	// 周数对象数组
 	private List<MonthWeekDayView> mwdvs = new ArrayList<MonthWeekDayView>();
+	private OnComponentAddedCompletedListener listener = null;
 	
 	public Timetable(Context context) {
 		super(context, null);
@@ -46,10 +47,10 @@ public class Timetable extends LinearLayout {
 
 	public Timetable(final Context context, AttributeSet attrs) {
 		super(context, attrs);
-		LinearLayout view = 
-				(LinearLayout)LayoutInflater.from(context).inflate(R.layout.timetable, this, true);
-		ButterKnife.bind(this, view);
-		
+		this.listener = (OnComponentAddedCompletedListener)context;
+		LayoutInflater.from(context).inflate(R.layout.timetable, this, true);
+		ButterKnife.bind(this);
+		// OnGlobalLayoutListener是在主线程中回调的
 		monthView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -127,6 +128,14 @@ public class Timetable extends LinearLayout {
 				new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1);
 		flLessons.setLayoutParams(flParams);
 		this.llClassLessonContainer.addView(flLessons);
+		flLessons.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				if(listener != null) 
+					listener.complete();
+				flLessons.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+			}
+		});
 	}
 	
 	/**
