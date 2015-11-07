@@ -1,24 +1,35 @@
 package com.attraction.schedule.db;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+@DatabaseTable(tableName="tb_lesson")
 public class Lesson implements Parcelable {
 	// 课程名称
+	@DatabaseField(columnName = "name", useGetSet=true)
 	private String name;
 	// 课程开始节课
+	@DatabaseField(columnName = "class_start", useGetSet=true)
 	private int classStart;
 	// 课程结束节课
+	@DatabaseField(columnName = "class_end", useGetSet=true)
 	private int classEnd;
 	// 上课教室
+	@DatabaseField(columnName = "class_room", useGetSet=true)
 	private String classRoom;
 	// 课程老师
+	@DatabaseField(columnName = "teacher", useGetSet=true)
 	private String teacher;
 	// 开始周
+	@DatabaseField(columnName = "week_start", useGetSet=true)
 	private int weekStart;
 	// 结束周
+	@DatabaseField(columnName = "week_end", useGetSet=true)
 	private int weekEnd;
 	// 星期几的课
+	@DatabaseField(columnName = "day", useGetSet=true)
 	private int day;
 	
 	public Lesson(String name, int classStart, int classEnd, String classRoom,
@@ -72,12 +83,20 @@ public class Lesson implements Parcelable {
 		return name;
 	}
 	
+	public void SetName(String name) {
+		this.name = name;
+	}
+	
 	/**
 	 * 获取开始节课
 	 * @return
 	 */
 	public int getClassStart() {
 		return classStart;
+	}
+	
+	public void setClassStart(int classStart) {
+		this.classStart = classStart;
 	}
 	
 	/**
@@ -88,6 +107,9 @@ public class Lesson implements Parcelable {
 		return classEnd;
 	}
 	
+	public void setClassEnd(int classEnd) {
+		this.classEnd = classEnd;
+	}
 	
 	/**
 	 * 获取开始周
@@ -95,6 +117,10 @@ public class Lesson implements Parcelable {
 	 */
 	public int getWeekStart() {
 		return weekStart;
+	}
+	
+	public void setWeekStart(int weekStart) {
+		this.weekStart = weekStart;
 	}
 	
 	/**
@@ -105,17 +131,44 @@ public class Lesson implements Parcelable {
 		return weekEnd;
 	}
 	
+	public void setWeekEnd(int weekEnd) {
+		this.weekEnd = weekEnd;
+	}
 	
+	/**
+	 * 获取教室
+	 * @return
+	 */
 	public String getClassRoom() {
 		return classRoom;
 	}
 	
+	public void setClassRoom(String classRoom) {
+		this.classRoom = classRoom;
+	}
+	
+	/**
+	 * 获取老师
+	 * @return
+	 */
 	public String getTeacher() {
 		return teacher;
 	}
 	
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
+	}
+	
+	/**
+	 * 获取是星期几的课
+	 * @return
+	 */
 	public int getDay() {
 		return day;
+	}
+	
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 	@Override
