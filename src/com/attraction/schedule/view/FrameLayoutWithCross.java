@@ -175,6 +175,8 @@ public class FrameLayoutWithCross extends FrameLayout implements OnClickListener
 	 * @param lessons
 	 */
 	public void addLessons(List<Lesson> lessons) {
+		if(lessons == null || lessons.size() == 0)
+			return;
 		for (Lesson lesson : lessons) {
 			LessonView child = new LessonView(context, lesson);
 			BlockPosition position = this.getPosition(lesson.getDay(), 

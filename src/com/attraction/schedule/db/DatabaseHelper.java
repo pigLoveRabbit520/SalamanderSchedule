@@ -14,7 +14,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private static final String  DATABASE_NAME = "schedule.db";
 	private static final int DATABASE_VERSION = 1;
 	// 双重加锁
-	private volatile static DatabaseHelper dbHelper;
+	private volatile static DatabaseHelper instance;
 	// DAO类
 	private Dao<Lesson, Integer> lessonDao = null;
 	
@@ -27,15 +27,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	 * @param context
 	 * @return
 	 */
-    public static DatabaseHelper getHelper(Context context)
+    public static DatabaseHelper getInstance(Context context)
     {
-        if (dbHelper == null) {
+        if (instance == null) {
             synchronized (DatabaseHelper.class) {
-                if (dbHelper == null)
-                	dbHelper = new DatabaseHelper(context);
+                if (instance == null)
+                	instance = new DatabaseHelper(context);
             }
         }
-        return dbHelper;
+        return instance;
     }
 
 	@Override
@@ -61,6 +61,17 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			lessonDao = this.getDao(Lesson.class);
 		}
 		return lessonDao;
+	}
+	
+	public SQLiteDatabase getSqLiteDatabase() {
+		return this.getWritableDatabase();
+	}
+
+	
+	@Override
+	public void close() {
+		lessonDao = null;
+		super.close();
 	}
 
 }

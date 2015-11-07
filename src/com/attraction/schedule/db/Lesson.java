@@ -89,7 +89,7 @@ public class Lesson implements Parcelable {
 		return name;
 	}
 	
-	public void SetName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	
