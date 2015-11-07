@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -14,6 +15,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	// 双重加锁
 	private volatile static DatabaseHelper dbHelper;
+	// DAO类
+	private Dao<Lesson, Integer> lessonDao = null;
 	
 	private DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -51,6 +54,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             ConnectionSource connectionSource, int oldVersion, int newVersion) {
 		// TODO 自动生成的方法存根
 		
+	}
+	
+	public Dao<Lesson, Integer> getLessonDao() throws SQLException {
+		if(lessonDao == null) {
+			lessonDao = this.getDao(Lesson.class);
+		}
+		return lessonDao;
 	}
 
 }
