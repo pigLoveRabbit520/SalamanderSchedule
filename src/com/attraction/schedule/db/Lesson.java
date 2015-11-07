@@ -7,6 +7,10 @@ import android.os.Parcelable;
 
 @DatabaseTable(tableName="tb_lesson")
 public class Lesson implements Parcelable {
+	
+	// 主键 id 自增长
+    @DatabaseField(generatedId = true)
+    private int id;
 	// 课程名称
 	@DatabaseField(columnName = "name", useGetSet=true)
 	private String name;
@@ -31,6 +35,8 @@ public class Lesson implements Parcelable {
 	// 星期几的课
 	@DatabaseField(columnName = "day", useGetSet=true)
 	private int day;
+	
+	public Lesson() {}
 	
 	public Lesson(String name, int classStart, int classEnd, String classRoom,
 			String teacher, int weekStart, int weekEnd, int day) {
