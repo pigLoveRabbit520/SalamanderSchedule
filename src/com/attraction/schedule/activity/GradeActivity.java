@@ -9,8 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.attraction.schedule.R;
-import com.attraction.schedule.adapter.LessonGrade;
 import com.attraction.schedule.adapter.LessonGradeAdapter;
+import com.attraction.schedule.db.LessonGrade;
 import com.attraction.schedule.tool.FetchUtil;
 
 import butterknife.Bind;

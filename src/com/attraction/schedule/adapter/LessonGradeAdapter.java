@@ -1,7 +1,10 @@
 package com.attraction.schedule.adapter;
 
 import java.util.List;
+
 import com.attraction.schedule.R;
+import com.attraction.schedule.db.LessonGrade;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

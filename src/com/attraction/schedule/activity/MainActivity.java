@@ -8,13 +8,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.attraction.schedule.R;
-import com.attraction.schedule.db.DatabaseHelper;
 import com.attraction.schedule.db.Lesson;
+import com.attraction.schedule.db.LessonDao;
 import com.attraction.schedule.tool.ParseUtil;
 import com.attraction.schedule.view.OnComponentAddedCompletedListener;
 import com.attraction.schedule.view.Timetable;
-import com.j256.ormlite.android.AndroidDatabaseConnection;
-import com.j256.ormlite.dao.Dao;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,8 +29,7 @@ public class MainActivity extends Activity implements OnComponentAddedCompletedL
 	@Bind(R.id.timetable_main)
 	Timetable timetable;
 	private static int FETCH = 0;
-	DatabaseHelper dbHelper = null;
-	Dao<Lesson, Integer> lessonDao = null;
+	LessonDao lessonDao = null;
 	List<Lesson> lessons = null;
 	private static final int GET_LESSONS = 2;
 	
@@ -41,7 +38,6 @@ public class MainActivity extends Activity implements OnComponentAddedCompletedL
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
-		dbHelper = DatabaseHelper.getInstance(this);
 	}
 	
 	@Override
@@ -50,7 +46,7 @@ public class MainActivity extends Activity implements OnComponentAddedCompletedL
 			@Override
 			public void run() {
 				try {
-					lessonDao = dbHelper.getLessonDao();
+					lessonDao = new LessonDao(MainActivity.this);
 					lessons = lessonDao.queryForAll();
 					handler.sendEmptyMessage(GET_LESSONS);
 				} catch (SQLException e) {
@@ -95,13 +91,11 @@ public class MainActivity extends Activity implements OnComponentAddedCompletedL
 				ParseUtil util = new ParseUtil();
 				lessons = util.parseLesson(html);
 				timetable.addLessons(lessons);
-				for (Lesson lesson : lessons) {
-					try {
-						lessonDao.create(lesson);
-					} catch (SQLException e) {
-						// TODO 自动生成的 catch 块
-						e.printStackTrace();
-					}
+				try {
+					lessonDao.addLessons(lessons);
+				} catch (SQLException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
 				}
 			}
 		}

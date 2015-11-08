@@ -1,4 +1,4 @@
-package com.attraction.schedule.adapter;
+package com.attraction.schedule.db;
 
 public class LessonGrade {
 	// 课程代码
