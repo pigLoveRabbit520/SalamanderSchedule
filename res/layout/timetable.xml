@@ -14,9 +14,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:paddingLeft="@dimen/monthView_left_right_padding"
-            android:paddingRight="@dimen/monthView_left_right_padding"
-            android:paddingTop="@dimen/monthWeekDayView_top_margin"
+            android:paddingLeft="@dimen/month_view_left_right_padding"
+            android:paddingRight="@dimen/month_view_left_right_padding"
+            android:paddingTop="@dimen/month_week_day_view_top_margin"
             android:textColor="@color/deep_blue" />
 
         <LinearLayout
@@ -27,25 +27,25 @@
             android:orientation="horizontal"
             android:paddingRight="@dimen/timetable_right_weekday_padding" >
 
-            <com.attraction.schedule.view.MonthWeekDayView style="@style/DateWeek" >
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
             </com.attraction.schedule.view.MonthWeekDayView>
 
-            <com.attraction.schedule.view.MonthWeekDayView style="@style/DateWeek" >
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
             </com.attraction.schedule.view.MonthWeekDayView>
 
-            <com.attraction.schedule.view.MonthWeekDayView style="@style/DateWeek" >
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
             </com.attraction.schedule.view.MonthWeekDayView>
 
-            <com.attraction.schedule.view.MonthWeekDayView style="@style/DateWeek" >
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
             </com.attraction.schedule.view.MonthWeekDayView>
 
-            <com.attraction.schedule.view.MonthWeekDayView style="@style/DateWeek" >
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
             </com.attraction.schedule.view.MonthWeekDayView>
 
-            <com.attraction.schedule.view.MonthWeekDayView style="@style/DateWeek" >
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
             </com.attraction.schedule.view.MonthWeekDayView>
 
-            <com.attraction.schedule.view.MonthWeekDayView style="@style/DateWeek" >
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
             </com.attraction.schedule.view.MonthWeekDayView>
         </LinearLayout>
     </com.attraction.schedule.view.LinearLayoutWithBottomLine>

@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/monthWeekDayView_top_margin"
+    android:paddingTop="@dimen/month_week_day_view_top_margin"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/monthWeekDay_month"
-        style="@style/DateWeekInnerTextStyle" />
+        style="@style/MonthWeekDayViewInnerTextViewStyle" />
 
     <TextView
         android:id="@+id/monthWeekDay_week"
         android:layout_margin="2dp"
-        style="@style/DateWeekInnerTextStyle" />
+        style="@style/MonthWeekDayViewInnerTextViewStyle" />
 
 </LinearLayout>

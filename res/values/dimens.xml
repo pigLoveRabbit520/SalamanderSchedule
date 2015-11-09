@@ -3,9 +3,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-	<dimen name="monthWeekDayView_top_margin">3dp</dimen>
-	<dimen name="monthWeekDayView_text_size">12sp</dimen>
-	<dimen name="monthView_left_right_padding">3dp</dimen>
+	<dimen name="month_week_day_view_top_margin">3dp</dimen>
+	<dimen name="month_week_day_view_text_size">12sp</dimen>
+	<dimen name="month_view_left_right_padding">3dp</dimen>
 	<!-- 右边周数的内补 -->
 	<dimen name="timetable_right_weekday_padding">2dp</dimen>
 	<!-- 底部节数的内补 -->

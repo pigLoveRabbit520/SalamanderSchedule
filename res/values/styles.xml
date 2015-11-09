@@ -17,15 +17,15 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <style name="DateWeekInnerTextStyle">
+    <style name="MonthWeekDayViewInnerTextViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/deep_blue</item>
-        <item name="android:textSize">@dimen/monthWeekDayView_text_size</item>
+        <item name="android:textSize">@dimen/month_week_day_view_text_size</item>
     </style>
 
-    <style name="DateWeek">
+    <style name="MonthWeekDayViewStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
