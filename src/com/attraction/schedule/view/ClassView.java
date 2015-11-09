@@ -32,7 +32,7 @@ public class ClassView extends TextView {
 	}
 	
 	private void setStyle() {
-		float size = getResources().getDimension(R.dimen.monthWeekDayView_text_size);
+		float size = getResources().getDimension(R.dimen.month_week_day_view_text_size);
 		int color = getResources().getColor(R.color.deep_blue); 
 		this.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
 		this.setTextColor(color);

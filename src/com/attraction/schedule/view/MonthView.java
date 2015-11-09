@@ -31,7 +31,7 @@ public class MonthView extends TextView {
 
 	public void setMonth(int month) {
 		this.month = month;
-		int size = getResources().getDimensionPixelSize(R.dimen.monthWeekDayView_text_size);
+		int size = getResources().getDimensionPixelSize(R.dimen.month_week_day_view_text_size);
 		SpannableString msp = new SpannableString(month + "月");
 		int length = String.valueOf(month).length();
 		msp.setSpan(new AbsoluteSizeSpan(size, false), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

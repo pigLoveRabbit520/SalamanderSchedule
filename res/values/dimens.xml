@@ -10,11 +10,11 @@
 	<dimen name="timetable_right_weekday_padding">2dp</dimen>
 	<!-- 底部节数的内补 -->
 	<dimen name="timetable_bottom_class_padding">2dp</dimen>
-	<dimen name="titlebar_padding">6dp</dimen>
 	<dimen name="settings_right_padding">10dp</dimen>
 	<dimen name="titlebar_text_size">16sp</dimen>
 	<dimen name="titlebar_height">40dp</dimen>
 	<dimen name="lesson_view_text_size">13sp</dimen>
 	<dimen name="lesson_view_corner_size">3dp</dimen>
 	<dimen name="lesson_view_padding">1.5dp</dimen>
+	<dimen name="title_bar_height">40dp</dimen>
 </resources>
