@@ -13,7 +13,7 @@ public class CommunityFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View layoutView = inflater.inflate(R.layout.fragment_community, null);
+		View layoutView = inflater.inflate(R.layout.fragment_community, container, false);
 		return layoutView;
 	}
 }

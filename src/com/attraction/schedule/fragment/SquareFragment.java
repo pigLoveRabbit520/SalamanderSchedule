@@ -13,7 +13,7 @@ public class SquareFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View layoutView = inflater.inflate(R.layout.fragment_square, null);
+		View layoutView = inflater.inflate(R.layout.fragment_square, container, false);
 		return layoutView;
 	}
 }

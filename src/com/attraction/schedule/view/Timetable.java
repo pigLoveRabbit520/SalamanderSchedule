@@ -11,7 +11,6 @@ import com.attraction.schedule.R;
 import com.attraction.schedule.db.Lesson;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -42,12 +41,12 @@ public class Timetable extends LinearLayout {
 	private OnComponentAddedCompletedListener listener = null;
 	
 	public Timetable(Context context) {
-		super(context, null);
+		super(context);
 	}
-
-	public Timetable(final Context context, AttributeSet attrs) {
-		super(context, attrs);
-		this.listener = (OnComponentAddedCompletedListener)context;
+	
+	public Timetable(final Context context, OnComponentAddedCompletedListener listener) {
+		super(context);
+		this.listener = listener;
 		LayoutInflater.from(context).inflate(R.layout.timetable, this, true);
 		ButterKnife.bind(this);
 		// OnGlobalLayoutListener是在主线程中回调的

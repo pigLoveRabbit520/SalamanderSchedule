@@ -24,14 +24,15 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
 
 public class ScheduleFragment extends Fragment implements OnComponentAddedCompletedListener {
 	@Bind(R.id.tv_main_settings)
 	TextView tvSettings;
-	@Bind(R.id.timetable_main)
-	Timetable timetable;
-	private static int FETCH = 0;
+	private Timetable timetable;
+	private static int FETCH = 3;
 	LessonDao lessonDao = null;
 	List<Lesson> lessons = null;
 	private static final int GET_LESSONS = 2;
@@ -44,8 +45,13 @@ public class ScheduleFragment extends Fragment implements OnComponentAddedComple
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View layoutView = inflater.inflate(R.layout.fragment_schedule, null);
+		ViewGroup layoutView = (ViewGroup)inflater.inflate(R.layout.fragment_schedule, container, false);
 		ButterKnife.bind(this, layoutView);
+		LinearLayout.LayoutParams params = 
+				new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		timetable = new Timetable(getActivity(), this);
+		timetable.setLayoutParams(params);
+		layoutView.addView(timetable);
 		return layoutView;
 	}
 
