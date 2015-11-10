@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class LessonGradeAdapter extends BaseAdapter {
 
-	private int resid = com.attraction.schedule.R.layout.listitem_grade;
+	private int resid = com.attraction.schedule.R.layout.listi_tem_grade;
 	private Context context;
 	private List<LessonGrade> grades;
 

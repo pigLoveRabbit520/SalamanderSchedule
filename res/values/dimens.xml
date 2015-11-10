@@ -18,4 +18,5 @@
 	<dimen name="lesson_view_padding">1.5dp</dimen>
 	<dimen name="title_bar_height">40dp</dimen>
 	<dimen name="tab_bar_text_size">10sp</dimen>
+	<dimen name="tab_bar_item_top_bottom_padding">3dp</dimen>
 </resources>

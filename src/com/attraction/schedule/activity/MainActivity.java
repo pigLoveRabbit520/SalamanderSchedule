@@ -62,6 +62,7 @@ public class MainActivity extends FragmentActivity {
 					setIndicator(getTabItemView(i, itemNames[i]));
 			tabHost.addTab(tabSpec, fragmentArray[i], null);
 		}
+		tabHost.getTabWidget().setBackgroundColor(getResources().getColor(R.color.tab_bar_back_color));
 		// TabWidget可以理解为底部选项卡栏
 		tabHost.setCurrentTab(0);
 	}
