@@ -19,4 +19,6 @@
     <color name="lesson_view_inner_bg_color3">#7f8acd45</color>
     <color name="lesson_view_inner_bg_color4">#7fc58f31</color>
     <color name="half_transparent_black">#7f000000</color>
+    <color name="tab_bar_back_color">#f9f9f9</color>
+    <color name="tab_bar_text_color">#737373</color>
 </resources>
