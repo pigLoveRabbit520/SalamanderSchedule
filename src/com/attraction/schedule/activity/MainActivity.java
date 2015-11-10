@@ -33,11 +33,11 @@ public class MainActivity extends FragmentActivity {
 		{"Community", "Schedule", "Square", "Me"};
 	
 	// 定义数组来存放按钮图片
-	private int mImageViewArray[] 
-			= {R.drawable.community,
-			R.drawable.table,
-			R.drawable.square, 
-			R.drawable.me
+	private int mImageViewArray[] = {
+			R.drawable.community_tab_item_bg,
+			R.drawable.schedule_tab_item_bg,
+			R.drawable.square_tab_item_bg, 
+			R.drawable.me_tab_item_bg
 	};
 	
 	@Override
@@ -62,7 +62,7 @@ public class MainActivity extends FragmentActivity {
 					setIndicator(getTabItemView(i, itemNames[i]));
 			tabHost.addTab(tabSpec, fragmentArray[i], null);
 		}
-		tabHost.getTabWidget().setBackgroundColor(getResources().getColor(R.color.tab_bar_back_color));
+		tabHost.getTabWidget().setBackgroundColor(getResources().getColor(R.color.white));
 		// TabWidget可以理解为底部选项卡栏
 		tabHost.setCurrentTab(0);
 	}
