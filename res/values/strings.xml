@@ -29,4 +29,11 @@
 	    <item>按学期查询</item>
 	     <item>按学年查询</item>
 	</string-array>
+	
+	<string-array name="tab_item_array_name">
+	    <item>社区</item>
+	    <item>课程表</item>
+	    <item>广场</item>
+	    <item>我</item>
+	</string-array>
 </resources>
