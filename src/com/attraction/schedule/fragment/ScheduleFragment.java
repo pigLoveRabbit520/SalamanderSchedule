@@ -44,7 +44,7 @@ public class ScheduleFragment extends Fragment implements OnComponentAddedComple
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View layoutView = inflater.inflate(R.layout.fragment_schedule, container, false);
+		View layoutView = inflater.inflate(R.layout.fragment_schedule, null);
 		ButterKnife.bind(this, layoutView);
 		return layoutView;
 	}

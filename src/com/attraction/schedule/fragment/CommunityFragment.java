@@ -1,5 +1,7 @@
 package com.attraction.schedule.fragment;
 
+import com.attraction.schedule.R;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +13,7 @@ public class CommunityFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO 自动生成的方法存根
-		return super.onCreateView(inflater, container, savedInstanceState);
+		View layoutView = inflater.inflate(R.layout.fragment_community, null);
+		return layoutView;
 	}
 }
