@@ -3,17 +3,22 @@ package com.attraction.schedule.fragment;
 import com.attraction.schedule.R;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class CommunityFragment extends Fragment {
-	
+public class CommunityFragment extends BaseFragment {
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View layoutView = inflater.inflate(R.layout.fragment_community, container, false);
-		return layoutView;
+		if (rootView == null) {
+			rootView = (ViewGroup) inflater.inflate(
+					R.layout.fragment_community, container, false);
+		} else {
+			this.removeParent();
+		}
+		return rootView;
 	}
+
 }

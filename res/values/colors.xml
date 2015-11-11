@@ -22,4 +22,5 @@
     <color name="half_transparent_black">#7f000000</color>
     <color name="tab_bar_item_text_normal_color">#929292</color>
     <color name="tab_bar_item_text_selected_color">#00a0e0</color>
+    <color name="divider_color">#e6e6e6</color>
 </resources>

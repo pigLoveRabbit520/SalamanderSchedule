@@ -16,7 +16,6 @@ import com.attraction.schedule.view.OnComponentAddedCompletedListener;
 import com.attraction.schedule.view.Timetable;
 
 import android.annotation.SuppressLint;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,7 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
-public class ScheduleFragment extends Fragment implements OnComponentAddedCompletedListener {
+public class ScheduleFragment extends BaseFragment implements OnComponentAddedCompletedListener {
 	@Bind(R.id.tv_main_settings)
 	TextView tvSettings;
 	private Timetable timetable;
@@ -38,21 +37,20 @@ public class ScheduleFragment extends Fragment implements OnComponentAddedComple
 	private static final int GET_LESSONS = 2;
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
-	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		ViewGroup layoutView = (ViewGroup)inflater.inflate(R.layout.fragment_schedule, container, false);
-		ButterKnife.bind(this, layoutView);
-		LinearLayout.LayoutParams params = 
-				new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-		timetable = new Timetable(getActivity(), this);
-		timetable.setLayoutParams(params);
-		layoutView.addView(timetable);
-		return layoutView;
+		if(rootView == null) {
+			rootView = (ViewGroup)inflater.inflate(R.layout.fragment_schedule, container, false);
+			ButterKnife.bind(this, rootView);
+			LinearLayout.LayoutParams params = 
+					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+			timetable = new Timetable(getActivity(), this);
+			timetable.setLayoutParams(params);
+			rootView.addView(timetable);
+		} else {
+			this.removeParent();
+		}
+		return rootView;
 	}
 
 	
