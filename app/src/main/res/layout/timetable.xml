@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <com.attraction.schedule.view.LinearLayoutWithBottomLine
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.attraction.schedule.view.MonthView
+            android:id="@+id/monthView_timetable_month"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingLeft="@dimen/month_view_left_right_padding"
+            android:paddingRight="@dimen/month_view_left_right_padding"
+            android:paddingTop="@dimen/month_week_day_view_top_margin"
+            android:textColor="@color/deep_blue" />
+
+        <LinearLayout
+            android:id="@+id/ll_timetable_monthWeekDayViewContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/timetable_right_weekday_padding" >
+
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
+            </com.attraction.schedule.view.MonthWeekDayView>
+
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
+            </com.attraction.schedule.view.MonthWeekDayView>
+
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
+            </com.attraction.schedule.view.MonthWeekDayView>
+
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
+            </com.attraction.schedule.view.MonthWeekDayView>
+
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
+            </com.attraction.schedule.view.MonthWeekDayView>
+
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
+            </com.attraction.schedule.view.MonthWeekDayView>
+
+            <com.attraction.schedule.view.MonthWeekDayView style="@style/MonthWeekDayViewStyle" >
+            </com.attraction.schedule.view.MonthWeekDayView>
+        </LinearLayout>
+    </com.attraction.schedule.view.LinearLayoutWithBottomLine>
+
+    <ScrollView
+        android:id="@+id/sv_timetable"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/ll_timetable_classLessonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
