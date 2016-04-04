@@ -1,5 +1,6 @@
-package com.attraction.schedule.tool;
+package com.attraction.schedule.helper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +9,16 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,11 +28,19 @@ import android.os.Handler;
 import android.os.Message;
 
 
-public class FetchUtil {
-	//第一个URL，等着为后面服务
-	public static final String loginURL = "http://jwc1.usst.edu.cn";
+public class FetchHelper {
+	// 第一个URL，等着为后面服务
+	public static final String loginURL = "http://jwc2.usst.edu.cn";
 	//第一个Post模拟登陆的URL
 	public static final String redirectURL = "http://jwc1.usst.edu.cn/default2.aspx";
+	// User-Agent
+	private static String userAgent =
+			"Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko";
+	// 连接超时
+	private static int connectTimeout = 5000;
+	// 获取响应数据超时
+	private static int socketTimeout = 5000;
+	private static CloseableHttpClient client = HttpClients.createDefault();
 	// viewState值
 	private String viewState = null;
 	// generator值
@@ -70,7 +82,7 @@ public class FetchUtil {
 	// 异常
 	String msg = null;
 	
-	public FetchUtil(Handler handler) {
+	public FetchHelper(Handler handler) {
 		this.handler = handler;
 	}
 	
@@ -88,17 +100,15 @@ public class FetchUtil {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				// TODO 自动生成的方法存根
-				HttpGet get = new HttpGet(FetchUtil.loginURL);
-				HttpClient httpClient = new DefaultHttpClient();
-				// 通过网络与服务器建立连接的超时时间
-				HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 5000);
-				// 从服务器获取响应数据的超时时间
-				HttpConnectionParams.setSoTimeout(httpClient.getParams(), 5000);
-				// 响应请求
-		        HttpResponse response;
+				HttpGet get = new HttpGet(FetchHelper.loginURL);
+				RequestConfig config = RequestConfig.custom().
+						setSocketTimeout(connectTimeout).
+						setConnectTimeout(socketTimeout).build();
+				get.setConfig(config);
+				get.setHeader("User-Agent", userAgent);
+				CloseableHttpResponse response = null;
 		        try {
-					response = httpClient.execute(get);
+					response = client.execute(get);
 					// 获取响应状态码
 			        int status = response.getStatusLine().getStatusCode();
 			        if(status == HttpStatus.SC_OK) {
@@ -116,33 +126,37 @@ public class FetchUtil {
 							handler.sendMessage(msg);
 							return;
 						}
-						FetchUtil.this.viewState = viewStateInput.attr("value");
+						FetchHelper.this.viewState = viewStateInput.attr("value");
 						if(generatorInput != null) {
-							FetchUtil.this.viewStateGenerator = generatorInput.attr("value");
+							FetchHelper.this.viewStateGenerator = generatorInput.attr("value");
 						}
 						if(validationInput != null) {
-							FetchUtil.this.eventValidation = validationInput.attr("value");
+							FetchHelper.this.eventValidation = validationInput.attr("value");
 						}
 						new Thread(new Runnable() {
 							@Override
 							public void run() {
-								// TODO 自动生成的方法存根
-								FetchUtil.this.login();
+								FetchHelper.this.login();
 							}
 						}).start();
 			        } else {
 			        	Message msg = handler.obtainMessage();
-			        	msg.what = FetchUtil.GET_VIEW_STATE_FAIL;
+			        	msg.what = FetchHelper.GET_VIEW_STATE_FAIL;
 			        	msg.obj = "抓取失败";
 			        	handler.sendMessage(msg);
 			        }
 				} catch (Exception e) {
-					// TODO 自动生成的 catch 块
 					e.printStackTrace();
 					Message msg = handler.obtainMessage();
-		        	msg.what = FetchUtil.GET_VIEW_STATE_FAIL;
+		        	msg.what = FetchHelper.GET_VIEW_STATE_FAIL;
 		        	msg.obj = "发生异常";
 		        	handler.sendMessage(msg);
+				} finally {
+					try {
+						response.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}).start();
@@ -150,13 +164,14 @@ public class FetchUtil {
 	
 	private void login() {
 		// 建立一个Post请求，第一步的方法是Post方法嘛
-		HttpPost httpPost = new HttpPost(FetchUtil.redirectURL);
-		// 禁止重定向，由于刚刚Post的状态值是重定向，所以我们要去禁止它，不然网页会乱飞
-		httpPost.getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, false); 
-		// 设置头部信息（头部信息在刚刚的Httpwatch下面Headers标签会有，不过我感觉写多跟写少没多大区别，只是多写没有坏处吧。）
-		httpPost.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko"); 
-		httpPost.setHeader("Content-Type","application/x-www-form-urlencoded");
-		
+		HttpPost post = new HttpPost(FetchHelper.redirectURL);
+		RequestConfig config = RequestConfig.custom()
+				.setSocketTimeout(connectTimeout)
+				.setConnectTimeout(socketTimeout)
+				.setRedirectsEnabled(false)
+				.build();
+		post.setConfig(config);
+		post.setHeader("User-Agent", userAgent);
 		// 第一种模拟登陆传值
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		// 将刚刚获取到的值添加到List的中
@@ -172,15 +187,15 @@ public class FetchUtil {
 		params.add(new BasicNameValuePair("Button1", ""));
 		params.add(new BasicNameValuePair("lbLanguage", ""));
         // 响应请求
-        HttpResponse response;
+        CloseableHttpResponse response = null;
 		try {
 			// 传递参数的时候注意编码使用,否则乱码        
-	        httpPost.setEntity(new UrlEncodedFormEntity(params, "GBK"));
-			response = new DefaultHttpClient().execute(httpPost);
+	        post.setEntity(new UrlEncodedFormEntity(params, "GBK"));
+			response = client.execute(post);
 			 // 获取响应状态码
 	        int status = response.getStatusLine().getStatusCode();
 	        // 302表示重定向状态
-	        if(status == 302) {
+	        if(status == HttpStatus.SC_OK) {
 	        	// 获取响应的cookie值
 	            cookie = response.getFirstHeader("Set-Cookie").getValue();
 	            location = response.getFirstHeader("location").getValue();
@@ -189,15 +204,19 @@ public class FetchUtil {
 	        	handler.sendEmptyMessage(LOGIN_ERROR);
 	        } else {
 	        	handler.sendEmptyMessage(LOGIN_FAIL);
-	        	FetchUtil.this.getViewState();
+	        	FetchHelper.this.getViewState();
 	        }
 		} catch (Exception e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 			handler.sendEmptyMessage(LOGIN_FAIL);
-			FetchUtil.this.getViewState();
+			FetchHelper.this.getViewState();
+		} finally {
+			try {
+				response.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-       
 	}
 	
 	
@@ -205,17 +224,16 @@ public class FetchUtil {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				// TODO 自动生成的方法存根
-				String mainURL = FetchUtil.loginURL + "/xskbcx.aspx?xh=" + account + "&gnmkdm=N121603";
+				String mainURL = FetchHelper.loginURL + "/xskbcx.aspx?xh=" + account + "&gnmkdm=N121603";
 				HttpGet get = new HttpGet(mainURL);
-				get.setHeader("Referer", FetchUtil.loginURL);
+				get.setHeader("Referer", FetchHelper.loginURL);
 				get.addHeader("Cookie", cookie);
 				// 获取Get响应，如果状态码是200的话表示连接成功
-				HttpResponse httpResponse;
+				CloseableHttpResponse response = null;
 				try {
-					httpResponse = new DefaultHttpClient().execute(get);
-					if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-					     HttpEntity entity = httpResponse.getEntity();
+					response = client.execute(get);
+					if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+					     HttpEntity entity = response.getEntity();
 				         // 获取纯净的主页HTML源码，这里大家可以将mianhtml定义在其他地方
 					     String html = EntityUtils.toString(entity);
 					     Message msg = handler.obtainMessage();
@@ -226,9 +244,14 @@ public class FetchUtil {
 						handler.sendEmptyMessage(FETCH_LESSON_FAIL);
 					}
 				} catch (Exception e) {
-					// TODO 自动生成的 catch 块
 					handler.sendEmptyMessage(FETCH_LESSON_FAIL);
 					e.printStackTrace();
+				} finally {
+					try {
+						response.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}).start();
@@ -246,14 +269,13 @@ public class FetchUtil {
 	 * 获取学年和学期
 	 */
 	public void getYearsTerms() {
-		String mainURL = FetchUtil.loginURL + "/xscj.aspx?xh=" + FetchUtil.account + "&gnmkdm=N121614";
+		String mainURL = FetchHelper.loginURL + "/xscj.aspx?xh=" + FetchHelper.account + "&gnmkdm=N121614";
 		HttpGet get = new HttpGet(mainURL);
-		get.setHeader("Referer", FetchUtil.loginURL);
+		get.setHeader("Referer", FetchHelper.loginURL);
 		get.addHeader("Cookie", cookie);
-		// 获取Get响应，如果状态码是200的话表示连接成功
-		HttpResponse response;
+		CloseableHttpResponse response = null;
 		try {
-			response = new DefaultHttpClient().execute(get);
+			response = client.execute(get);
 			if(response.getStatusLine().getStatusCode() == 200) {
 				HttpEntity entity = response.getEntity();
 				String html = EntityUtils.toString(entity);
@@ -272,9 +294,14 @@ public class FetchUtil {
 				handler.sendEmptyMessage(FETCH_YEARS_TERMS_FAIL);
 			}
 		} catch (Exception e) {
-			// TODO 自动生成的 catch 块
 			handler.sendEmptyMessage(FETCH_YEARS_TERMS_FAIL);
 			e.printStackTrace();
+		} finally {
+			try {
+				response.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -285,11 +312,10 @@ public class FetchUtil {
 	 * @param type 查询方式
 	 */
 	public void getGradeInfo(String year, String term, int type) {
-		String url = FetchUtil.loginURL  + "/xscj.aspx?xh=" + FetchUtil.account + "&gnmkdm=N121614";
+		String url = FetchHelper.loginURL  + "/xscj.aspx?xh=" + FetchHelper.account + "&gnmkdm=N121614";
 		HttpPost httpPost = new HttpPost(url);
-		// 设置头部信息
 		httpPost.setHeader("Referer", url); 
-		httpPost.addHeader("Cookie", FetchUtil.cookie);
+		httpPost.addHeader("Cookie", FetchHelper.cookie);
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("__VIEWSTATE", this.viewState));
 		params.add(new BasicNameValuePair("__VIEWSTATEGENERATOR", this.viewStateGenerator));  
@@ -303,11 +329,12 @@ public class FetchUtil {
 		} else {
 			params.add(new BasicNameValuePair("Button5", "%B0%B4%D1%A7%C4%EA%B2%E9%D1%AF"));
 		}
+		CloseableHttpResponse response = null;
 		try {
 			// 传递参数的时候注意编码使用,否则乱码        
 	        httpPost.setEntity(new UrlEncodedFormEntity(params, "gb2312"));
-	        HttpResponse response = new DefaultHttpClient().execute(httpPost);
-			if(response.getStatusLine().getStatusCode() == 200) {
+	        response = client.execute(httpPost);
+			if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 			     HttpEntity entity = response.getEntity();
 			     String html = EntityUtils.toString(entity);
 			     Message msg = handler.obtainMessage();
@@ -318,9 +345,14 @@ public class FetchUtil {
 				handler.sendEmptyMessage(FETCH_GRADE_FAIL);
 			}
 		} catch (Exception e) {
-			// TODO 自动生成的 catch 块
 			handler.sendEmptyMessage(FETCH_GRADE_FAIL);
 			e.printStackTrace();
+		} finally {
+			try {
+				response.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

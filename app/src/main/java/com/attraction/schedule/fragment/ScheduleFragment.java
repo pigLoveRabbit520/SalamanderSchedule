@@ -97,7 +97,6 @@ public class ScheduleFragment extends BaseFragment implements OnComponentAddedCo
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO 自动生成的方法存根
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode == FETCH) {
 			if(resultCode == ImportActivity.FETCH_SUCCESS) {

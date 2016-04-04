@@ -11,7 +11,7 @@ import org.jsoup.select.Elements;
 import com.attraction.schedule.R;
 import com.attraction.schedule.adapter.LessonGradeAdapter;
 import com.attraction.schedule.db.LessonGrade;
-import com.attraction.schedule.tool.FetchUtil;
+import com.attraction.schedule.helper.FetchHelper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,7 +43,7 @@ public class GradeActivity extends Activity {
 	private ProgressDialog proDialog;
 	// 计数
 	private static int count = 0;
-	FetchUtil fetch = null;
+	FetchHelper fetch = null;
 	List<LessonGrade> grades = new ArrayList<LessonGrade>();
 
 	@Override
@@ -70,7 +70,7 @@ public class GradeActivity extends Activity {
 	 */
 	private void prepare() {
 		showDialog();
-		fetch = new FetchUtil(handler);
+		fetch = new FetchHelper(handler);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -117,23 +117,23 @@ public class GradeActivity extends Activity {
 			// TODO 自动生成的方法存根
 			super.handleMessage(msg);
 			switch (msg.what) {
-			case FetchUtil.FETCH_YEARS_TERMS_SUCCESS:
+			case FetchHelper.FETCH_YEARS_TERMS_SUCCESS:
 				String htmlYearsTerms = (String)msg.obj;
 				extraYearsTerms(htmlYearsTerms);
 				GradeActivity.this.closeDialog();
 			    break;
-			case FetchUtil.FETCH_YEARS_TERMS_FAIL:
+			case FetchHelper.FETCH_YEARS_TERMS_FAIL:
 				Toast.makeText(GradeActivity.this, "获取学年学期信息失败！", Toast.LENGTH_SHORT).show();
 				GradeActivity.this.closeDialog();
 				break;
-			case FetchUtil.FETCH_GRADE_SUCCESS:
+			case FetchHelper.FETCH_GRADE_SUCCESS:
 				String htmlGrades = (String)msg.obj;
 				GradeActivity.this.parseLessonGrades(htmlGrades);
 				LessonGradeAdapter adapter = new LessonGradeAdapter(GradeActivity.this, grades);
 				GradeActivity.this.lvGrade.setAdapter(adapter);
 				GradeActivity.this.closeDialog();
 				break;
-			case FetchUtil.FETCH_GRADE_FAIL:
+			case FetchHelper.FETCH_GRADE_FAIL:
 				Toast.makeText(GradeActivity.this, "获取成绩失败！", Toast.LENGTH_SHORT).show();
 				GradeActivity.this.closeDialog();
 			default:
