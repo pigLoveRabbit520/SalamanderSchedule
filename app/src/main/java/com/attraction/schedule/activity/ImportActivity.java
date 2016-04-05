@@ -79,22 +79,26 @@ public class ImportActivity extends Activity {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch (msg.what) {
+				case FetchHelper.NETWORK_ERROR:
+					tvLog.append("网络出错：" + "\n");
+					closeDialog();
+					break;
 			case FetchHelper.GET_VIEW_STATE_FAIL:
 				String info = (String) msg.obj;
 				tvLog.append("viewstate获取失败：" + info + "\n");
-				ImportActivity.this.closeDialog();
+				closeDialog();
 				break;
 			case FetchHelper.LOGIN_ERROR:
 				Toast.makeText(ImportActivity.this, "账号或密码错误！",
 						Toast.LENGTH_SHORT).show();
-				ImportActivity.this.closeDialog();
+				closeDialog();
 				break;
 			case FetchHelper.LOGIN_FAIL:
 				tvLog.append("登录失败!" + "\n");
 				break;
 			case FetchHelper.LOGIN_SUCCESS:
 				tvLog.append("登录成功！\n");
-				ImportActivity.this.closeDialog();
+				closeDialog();
 				break;
 			case FetchHelper.FETCH_LESSON_SUCCESS:
 				tvLog.append("抓取成功!" + "\n");
@@ -106,7 +110,7 @@ public class ImportActivity extends Activity {
 				break;
 			case FetchHelper.FETCH_LESSON_FAIL:
 				tvLog.append("抓取失败：" + (String) msg.obj);
-				ImportActivity.this.closeDialog();
+				closeDialog();
 				break;
 			default:
 				break;

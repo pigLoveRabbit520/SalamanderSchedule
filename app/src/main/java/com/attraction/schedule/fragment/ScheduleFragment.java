@@ -107,7 +107,6 @@ public class ScheduleFragment extends BaseFragment implements OnComponentAddedCo
 				try {
 					lessonDao.addLessons(lessons);
 				} catch (SQLException e) {
-					// TODO 自动生成的 catch 块
 					e.printStackTrace();
 				}
 			}
