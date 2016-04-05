@@ -25,7 +25,7 @@ public class RelativeLayoutWithBottomLine extends RelativeLayout {
 	protected void onDraw(Canvas canvas) {
 		// TODO 自动生成的方法存根
 		Paint paint = new Paint();
-		int color = getResources().getColor(R.color.titlebar_bottom_linn_color);
+		int color = getResources().getColor(R.color.title_bar_bottom_linn_color);
 		paint.setColor(color);
 		int width = this.getWidth();
 		int height = this.getHeight();

@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/titlebar_height"
+        android:layout_height="@dimen/title_bar_height"
         android:background="@color/light_blue" >
 
         <TextView
@@ -20,77 +20,97 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
-    <TableLayout
-        android:layout_width="match_parent"
+   <LinearLayout
+       android:id="@+id/ll_import_container"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:padding="10dp"
+       android:orientation="vertical">
+
+       <TableLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:focusable="true"
+           android:focusableInTouchMode="true"
+           android:background="@drawable/import_input_bg">
+
+           <!-- 表格布局：第一行 -->
+
+           <TableRow
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <TextView
+                   style="@style/AccountPasswordTextStyle"
+                   android:text="@string/account" >
+               </TextView>
+
+               <EditText
+                   android:id="@+id/edtTxt_import_account"
+                   android:layout_width="0dp"
+                   android:layout_gravity="center_vertical"
+                   android:layout_weight="1"
+                   android:background="@null"
+                   android:inputType="number"
+                   android:padding="10dip"
+                   android:singleLine="true"
+                   android:textSize="17sp" >
+               </EditText>
+           </TableRow>
+
+           <View
+               android:layout_width="match_parent"
+               android:layout_height="1dp"
+               android:background="@color/import_input_divider" />
+           <!-- 表格布局：第二行 -->
+
+           <TableRow
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <TextView
+                   style="@style/AccountPasswordTextStyle"
+                   android:text="@string/password" >
+               </TextView>
+
+               <EditText
+                   android:id="@+id/edtTxt_import_password"
+                   android:layout_width="0dp"
+                   android:layout_gravity="center_vertical"
+                   android:layout_weight="1"
+                   android:background="@null"
+                   android:inputType="textPassword"
+                   android:padding="10dip"
+                   android:singleLine="true"
+                   android:textSize="17sp" >
+               </EditText>
+           </TableRow>
+       </TableLayout>
+
+       <Button
+           android:id="@+id/btn_import_login"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="15dp"
+           android:background="@drawable/btn_fetch_bg"
+           android:padding="8dp"
+           android:text="@string/login"
+           android:textColor="@color/white"
+           android:textSize="17sp" >
+       </Button>
+
+   </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_import_loginSuccess"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:padding="10dip" >
-
-        <!-- 表格布局：第一行 -->
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_top_corner_no_bottom_line" >
-
-            <TextView
-                style="@style/AccountPasswordTextStyle"
-                android:text="@string/account" >
-            </TextView>
-
-            <EditText
-                android:id="@+id/edtTxt_import_account"
-                android:layout_width="0dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@null"
-                android:inputType="number"
-                android:padding="10dip"
-                android:singleLine="true"
-                android:textSize="17sp" >
-            </EditText>
-        </TableRow>
-        <!-- 表格布局：第二行 -->
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_bottom_corner_no_top_line" >
-
-            <TextView
-                style="@style/AccountPasswordTextStyle"
-                android:text="@string/password" >
-            </TextView>
-
-            <EditText
-                android:id="@+id/edtTxt_import_password"
-                android:layout_width="0dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@null"
-                android:inputType="textPassword"
-                android:padding="10dip"
-                android:singleLine="true"
-                android:textSize="17sp" >
-            </EditText>
-        </TableRow>
-    </TableLayout>
-
-    <Button
-        android:id="@+id/btn_import_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/btn_fetch_bg"
-        android:padding="8dp"
-        android:text="@string/login"
-        android:textColor="@color/white"
-        android:textSize="17sp" >
-    </Button>
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:textSize="23sp"
+        android:layout_marginTop="10dp"
+        android:textColor="#242424"
+        android:text="登录成功"/>
 
     <LinearLayout
         android:layout_width="match_parent"

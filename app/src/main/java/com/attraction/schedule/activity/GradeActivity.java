@@ -48,7 +48,6 @@ public class GradeActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO 自动生成的方法存根
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_grade);
 		ButterKnife.bind(this);
@@ -56,12 +55,8 @@ public class GradeActivity extends Activity {
 
 	@Override
 	protected void onStart() {
-		// TODO 自动生成的方法存根
 		super.onStart();
-		if(count == 0) {
-			count = 1;
-			prepare();
-		}
+		prepare();
 	}
 	
 
@@ -71,18 +66,11 @@ public class GradeActivity extends Activity {
 	private void prepare() {
 		showDialog();
 		fetch = new FetchHelper(handler);
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				// TODO 自动生成的方法存根
-				fetch.getYearsTerms();
-			}
-		}).start();
+		fetch.getYearsTerms();
 	}
 	
 	@Override
 	protected void onDestroy() {
-		// TODO 自动生成的方法存根
 		super.onDestroy();
 		if(proDialog != null && proDialog.isShowing()) {
 			this.proDialog.dismiss();
@@ -114,7 +102,6 @@ public class GradeActivity extends Activity {
 	public Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO 自动生成的方法存根
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case FetchHelper.FETCH_YEARS_TERMS_SUCCESS:
@@ -221,13 +208,7 @@ public class GradeActivity extends Activity {
 		final String year = spnYear.getSelectedItem().toString();
 		final String term = spnTerm.getSelectedItem().toString();
 		final int type = spnType.getSelectedItemPosition();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				// TODO 自动生成的方法存根
-				fetch.getGradeInfo(year, term, type);
-			}
-		}).start();
+		fetch.getGradeInfo(year, term, type);
 	}
 	
 

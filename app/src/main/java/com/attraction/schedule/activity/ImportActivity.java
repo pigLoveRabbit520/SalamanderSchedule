@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,13 @@ public class ImportActivity extends Activity {
 	Button btnQueryGrade = null;
 	@Bind(R.id.tv_main_log)
 	TextView tvLog;
+    @Bind(R.id.tv_import_loginSuccess)
+    TextView tvLoginSuccess;
+	@Bind(R.id.ll_import_container)
+    LinearLayout llContainer = null;
 	private ProgressDialog proDialog;
+    // 是否已经登录
+    private static boolean isLogin = false;
 	FetchHelper fetch = null;
 	private boolean existData = false;
 	public static int FETCH_SUCCESS = 1;
@@ -42,6 +49,9 @@ public class ImportActivity extends Activity {
 		setContentView(R.layout.activity_import);
 		ButterKnife.bind(this);
 		fetch = new FetchHelper(handler);
+        if (isLogin) {
+            hide();
+        }
 	}
 
 	@Override
@@ -51,6 +61,14 @@ public class ImportActivity extends Activity {
 			this.proDialog.dismiss();
 		}
 	}
+
+    /**
+     * 隐藏登录输入框和按钮
+     */
+    private void hide() {
+        llContainer.setVisibility(View.GONE);
+        tvLoginSuccess.setVisibility(View.VISIBLE);
+    }
 
 	/**
 	 * 开启等待框
@@ -66,13 +84,6 @@ public class ImportActivity extends Activity {
 		this.proDialog.show();
 	}
 
-	/**
-	 * 关闭等待框
-	 */
-	public void closeDialog() {
-		this.proDialog.dismiss();
-	}
-
 	@SuppressLint("HandlerLeak")
 	public Handler handler = new Handler() {
 		@Override
@@ -80,25 +91,27 @@ public class ImportActivity extends Activity {
 			super.handleMessage(msg);
 			switch (msg.what) {
 				case FetchHelper.NETWORK_ERROR:
-					tvLog.append("网络出错：" + "\n");
-					closeDialog();
+					tvLog.append("网络出了小问题" + "\n");
+					proDialog.dismiss();
 					break;
 			case FetchHelper.GET_VIEW_STATE_FAIL:
 				String info = (String) msg.obj;
 				tvLog.append("viewstate获取失败：" + info + "\n");
-				closeDialog();
+				proDialog.dismiss();
 				break;
 			case FetchHelper.LOGIN_ERROR:
 				Toast.makeText(ImportActivity.this, "账号或密码错误！",
 						Toast.LENGTH_SHORT).show();
-				closeDialog();
+				proDialog.dismiss();
 				break;
 			case FetchHelper.LOGIN_FAIL:
 				tvLog.append("登录失败!" + "\n");
 				break;
 			case FetchHelper.LOGIN_SUCCESS:
+                hide();
+                isLogin = true;
 				tvLog.append("登录成功！\n");
-				closeDialog();
+				proDialog.dismiss();
 				break;
 			case FetchHelper.FETCH_LESSON_SUCCESS:
 				tvLog.append("抓取成功!" + "\n");
@@ -109,15 +122,14 @@ public class ImportActivity extends Activity {
 				ImportActivity.this.finish();
 				break;
 			case FetchHelper.FETCH_LESSON_FAIL:
-				tvLog.append("抓取失败：" + (String) msg.obj);
-				closeDialog();
+				tvLog.append("抓取失败：" + "\n");
+				proDialog.dismiss();
 				break;
 			default:
 				break;
 			}
 		}
-
-	};
+    };
 
 	@OnClick({ R.id.btn_import_login, R.id.btn_import_lesson, R.id.btn_import_grade })
 	public void onClick(View v) {
@@ -171,7 +183,6 @@ public class ImportActivity extends Activity {
 	
 	@Override
 	public void finish() {
-		// TODO 自动生成的方法存根
 		if(!existData) {
 			setResult(NO_DATA, null);
 		}

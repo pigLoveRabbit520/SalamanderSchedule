@@ -4,8 +4,8 @@
     <color name="black">#000</color>
     <color name="transparent">#00000000</color>
     <color name="deep_blue">#5996d3</color>
-    <color name="titlebar_bakc_color">#f7f7f7</color>
-    <color name="titlebar_bottom_linn_color">#cfcfcf</color>
+    <color name="title_bar_bakc_color">#f7f7f7</color>
+    <color name="title_bar_bottom_linn_color">#cfcfcf</color>
     <color name="not_this_week_back_color">#3fa5a5a5</color>
     <color name="add_lesson_back_color">#4Da0a0a0</color>
     <color name="btn_parse_normal">#98ba27</color>
@@ -13,6 +13,7 @@
     <color name="btn_parse_press">#a6cc2b</color>
     <color name="light_blue">#18b4ed</color>
     <color name="back_color">#f5f5f9</color>
+    <color name="import_input_divider">#ffa8abad</color>
     
     <!-- 课程块内置背景颜色 -->
     <color name="lesson_view_inner_bg_color1">#7fe63447</color>
