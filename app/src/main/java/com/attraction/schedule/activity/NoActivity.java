@@ -3,7 +3,7 @@ package com.attraction.schedule.activity;
 import com.attraction.schedule.R;
 import com.attraction.schedule.fragment.CommunityFragment;
 import com.attraction.schedule.fragment.MeFragment;
-import com.attraction.schedule.fragment.ScheduleFragment;
+import com.attraction.schedule.fragment.MainActivity;
 import com.attraction.schedule.fragment.SquareFragment;
 
 import butterknife.Bind;
@@ -17,15 +17,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
 
-
-public class MainActivity extends FragmentActivity {
+/**
+ * 这个类本来是主界面，但由于项目不做了（只做了模拟登录部分），所以抛弃了
+ * 主界面本来有4个tab
+ */
+public class NoActivity extends FragmentActivity {
 	@Bind(R.id.tab_host_actvitiy_main)
 	FragmentTabHost tabHost;
 	
 	// 定义数组来存放Fragment界面 
 	@SuppressWarnings("rawtypes")
 	private Class fragmentArray[] = {  
-            CommunityFragment.class, ScheduleFragment.class,  
+            CommunityFragment.class, MainActivity.class,
             SquareFragment.class, MeFragment.class  
     };
 	

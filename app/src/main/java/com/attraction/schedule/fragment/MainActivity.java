@@ -16,6 +16,7 @@ import com.attraction.schedule.view.OnComponentAddedCompletedListener;
 import com.attraction.schedule.view.Timetable;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,31 +27,32 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
+/**
+ * 这个类本来是课程表界面，但由于项目不做了（只做了模拟登录部分）
+ * 主界面本来有4个tab
+ */
 
-public class ScheduleFragment extends BaseFragment implements OnComponentAddedCompletedListener {
+public class MainActivity extends Activity implements OnComponentAddedCompletedListener {
 	@Bind(R.id.tv_main_settings)
 	TextView tvSettings;
+    @Bind(R.id.ll_main_root)
+    LinearLayout rootView;
 	private Timetable timetable;
 	private static int FETCH = 3;
 	LessonDao lessonDao = null;
 	List<Lesson> lessons = null;
 	private static final int GET_LESSONS = 2;
-	
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		if(rootView == null) {
-			rootView = (ViewGroup)inflater.inflate(R.layout.fragment_schedule, container, false);
-			ButterKnife.bind(this, rootView);
-			LinearLayout.LayoutParams params = 
-					new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-			timetable = new Timetable(getActivity(), this);
-			timetable.setLayoutParams(params);
-			rootView.addView(timetable);
-		} else {
-			this.removeParent();
-		}
-		return rootView;
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_schedule);
+        ButterKnife.bind(this);
+        LinearLayout.LayoutParams params =
+                new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        timetable = new Timetable(this, this);
+        timetable.setLayoutParams(params);
+        rootView.addView(timetable);
 	}
 
 	
@@ -60,7 +62,7 @@ public class ScheduleFragment extends BaseFragment implements OnComponentAddedCo
 			@Override
 			public void run() {
 				try {
-					lessonDao = new LessonDao(getActivity());
+					lessonDao = new LessonDao(MainActivity.this);
 					lessons = lessonDao.queryForAll();
 					handler.sendEmptyMessage(GET_LESSONS);
 				} catch (SQLException e) {
@@ -87,7 +89,7 @@ public class ScheduleFragment extends BaseFragment implements OnComponentAddedCo
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.tv_main_settings:
-			Intent intent = new Intent(getActivity(), ImportActivity.class);
+			Intent intent = new Intent(MainActivity.this, ImportActivity.class);
 			startActivityForResult(intent, FETCH);
 			break;
 		default:

@@ -235,8 +235,13 @@ public class FetchHelper {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 				if(statusCode == HttpStatus.SC_OK) {
-					String html = new String(responseBody);
-					Document doc = Jsoup.parse(html);
+                    String html = null;
+                    try {
+                        html = new String(responseBody, encoding);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    Document doc = Jsoup.parse(html);
 					Element viewStateInput = doc.select("input[name=__VIEWSTATE]").first();
 					Element generatorInput = doc.select("input[name=__VIEWSTATEGENERATOR]").first();
 					Element validationInput = doc.select("input[name=__EVENTVALIDATION]").first();
@@ -288,7 +293,12 @@ public class FetchHelper {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 				if(statusCode == HttpStatus.SC_OK) {
-					String html = new String(responseBody);
+					String html = null;
+					try {
+						html = new String(responseBody, encoding);
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
 					Message msg = handler.obtainMessage();
 					msg.obj = html;
 					msg.what = FETCH_GRADE_SUCCESS;
