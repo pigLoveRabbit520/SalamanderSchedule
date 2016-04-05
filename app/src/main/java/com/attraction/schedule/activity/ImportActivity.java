@@ -141,14 +141,14 @@ public class ImportActivity extends Activity {
 			}
 			break;
 		case R.id.btn_import_lesson:
-			if (FetchHelper.cookie == null) {
+			if (!FetchHelper.isLogin()) {
 				Toast.makeText(this, "请登录！", Toast.LENGTH_SHORT).show();
 			} else {
 				fetch.getLessonInfo();
 			}
 			break;
 		case R.id.btn_import_grade:
-			if (FetchHelper.cookie == null) {
+			if (!FetchHelper.isLogin()) {
 				Toast.makeText(this, "请登录！", Toast.LENGTH_SHORT).show();
 			} else {
 				Intent intent = new Intent(ImportActivity.this,

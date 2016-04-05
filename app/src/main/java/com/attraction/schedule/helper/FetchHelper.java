@@ -67,12 +67,9 @@ public class FetchHelper {
 	// 密码
 	public static String password = null;
 	// 登录后cookie
-	public static String cookie = null;
+	private static String cookie = null;
 	// 重定向地址
 	private static String location = null;
-	
-	// 异常
-	String msg = null;
 	
 	public FetchHelper(Handler handler) {
 		this.handler = handler;
@@ -90,6 +87,14 @@ public class FetchHelper {
 	 */
 	public void startLogin() {
 		getViewState();
+	}
+
+    /**
+     * 判断是否登录
+     * @return
+     */
+	public static boolean isLogin() {
+		return cookie != null;
 	}
 	
 	/**
