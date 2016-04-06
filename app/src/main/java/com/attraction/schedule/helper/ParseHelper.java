@@ -1,4 +1,4 @@
-package com.attraction.schedule.tool;
+package com.attraction.schedule.helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.jsoup.select.Elements;
 
 import com.attraction.schedule.db.Lesson;
 
-public class ParseUtil {
+public class ParseHelper {
 	
 	/**
 	 * 解析课表

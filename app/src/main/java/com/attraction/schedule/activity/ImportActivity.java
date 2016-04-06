@@ -2,6 +2,8 @@ package com.attraction.schedule.activity;
 
 import com.attraction.schedule.R;
 import com.attraction.schedule.helper.FetchHelper;
+import com.attraction.schedule.view.CommonToast;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -73,13 +75,13 @@ public class ImportActivity extends Activity {
 	/**
 	 * 开启等待框
 	 */
-	public void showDialog() {
-		proDialog = new ProgressDialog(ImportActivity.this);
+	public void showDialog(String text) {
+		proDialog = new ProgressDialog(this);
 		this.proDialog.setTitle(null);
 		// 百分比计算
 		proDialog.setProgress(100);
 		proDialog.setIndeterminate(false);
-		this.proDialog.setMessage("正在登录...");
+		this.proDialog.setMessage(text);
 		this.proDialog.setCancelable(false);
 		this.proDialog.show();
 	}
@@ -92,42 +94,37 @@ public class ImportActivity extends Activity {
 			switch (msg.what) {
 				case FetchHelper.NETWORK_ERROR:
 					tvLog.append("网络出了小问题" + "\n");
-					proDialog.dismiss();
 					break;
-			case FetchHelper.GET_VIEW_STATE_FAIL:
-				String info = (String) msg.obj;
-				tvLog.append("viewstate获取失败：" + info + "\n");
-				proDialog.dismiss();
-				break;
-			case FetchHelper.LOGIN_ERROR:
-				Toast.makeText(ImportActivity.this, "账号或密码错误！",
-						Toast.LENGTH_SHORT).show();
-				proDialog.dismiss();
-				break;
-			case FetchHelper.LOGIN_FAIL:
-				tvLog.append("登录失败!" + "\n");
-				break;
-			case FetchHelper.LOGIN_SUCCESS:
-                hide();
-                isLogin = true;
-				tvLog.append("登录成功！\n");
-				proDialog.dismiss();
-				break;
-			case FetchHelper.FETCH_LESSON_SUCCESS:
-				tvLog.append("抓取成功!" + "\n");
-				Intent intent = new Intent();
-				intent.putExtra("html", (String)msg.obj);
-				ImportActivity.this.existData = true;
-				setResult(FETCH_SUCCESS, intent);
-				ImportActivity.this.finish();
-				break;
-			case FetchHelper.FETCH_LESSON_FAIL:
-				tvLog.append("抓取失败：" + "\n");
-				proDialog.dismiss();
-				break;
-			default:
-				break;
+                case FetchHelper.GET_VIEW_STATE_FAIL:
+                    String info = (String) msg.obj;
+                    tvLog.append("viewstate获取失败：" + info + "\n");
+                    break;
+                case FetchHelper.LOGIN_ERROR:
+                    CommonToast.showToast(ImportActivity.this, "账号或密码错误！");
+                    break;
+                case FetchHelper.LOGIN_FAIL:
+                    tvLog.append("登录失败!" + "\n");
+                    break;
+                case FetchHelper.LOGIN_SUCCESS:
+                    hide();
+                    isLogin = true;
+                    tvLog.append("登录成功！\n");
+                    break;
+                case FetchHelper.FETCH_LESSON_SUCCESS:
+                    tvLog.append("抓取成功!" + "\n");
+                    Intent intent = new Intent();
+                    intent.putExtra("html", (String)msg.obj);
+                    ImportActivity.this.existData = true;
+                    setResult(FETCH_SUCCESS, intent);
+                    ImportActivity.this.finish();
+                    break;
+                case FetchHelper.FETCH_LESSON_FAIL:
+                    tvLog.append("抓取失败：" + "\n");
+                    break;
+                default:
+                    break;
 			}
+            proDialog.dismiss();
 		}
     };
 
@@ -136,20 +133,21 @@ public class ImportActivity extends Activity {
 		switch (v.getId()) {
 		case R.id.btn_import_login:
 			if (setStuInfo()) {
-				showDialog();
+				showDialog("正在登录...");
 				fetch.startLogin();
 			}
 			break;
 		case R.id.btn_import_lesson:
 			if (!FetchHelper.isLogin()) {
-				Toast.makeText(this, "请登录！", Toast.LENGTH_SHORT).show();
+				CommonToast.showToast(this, "请登录！");
 			} else {
+                showDialog("正在获取课程信息...");
 				fetch.getLessonInfo();
 			}
 			break;
 		case R.id.btn_import_grade:
 			if (!FetchHelper.isLogin()) {
-				Toast.makeText(this, "请登录！", Toast.LENGTH_SHORT).show();
+				CommonToast.showToast(this, "请登录！");
 			} else {
 				Intent intent = new Intent(ImportActivity.this,
 						GradeActivity.class);
@@ -168,8 +166,7 @@ public class ImportActivity extends Activity {
 	private boolean setStuInfo() {
 		if (tvAccount.getText().length() == 0
 				|| tvPassword.getText().length() == 0) {
-			Toast.makeText(this.getApplicationContext(), "请设置你的信息！",
-					Toast.LENGTH_SHORT).show();
+			CommonToast.showToast(this, "请设置你的信息！");
 			return false;
 		}
 		String account = tvAccount.getText().toString();

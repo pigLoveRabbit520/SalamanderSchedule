@@ -7,16 +7,11 @@ package com.attraction.schedule.tool;
  */
 public class CommonUtil {
 	/**
-	 * 判断是否为空串
+	 * 判断字符串是否为空
 	 * @param str
 	 * @return
 	 */
-	public static boolean isEmptyStr(String str) {
-		if(str == null || str.length() <= 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public static boolean isStrEmpty(String str) {
+		return (str == null) || (str.length() == 0);
 	}
 }

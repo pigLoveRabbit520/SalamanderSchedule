@@ -11,7 +11,7 @@ import com.attraction.schedule.R;
 import com.attraction.schedule.activity.ImportActivity;
 import com.attraction.schedule.db.Lesson;
 import com.attraction.schedule.db.LessonDao;
-import com.attraction.schedule.tool.ParseUtil;
+import com.attraction.schedule.helper.ParseHelper;
 import com.attraction.schedule.view.OnComponentAddedCompletedListener;
 import com.attraction.schedule.view.Timetable;
 
@@ -21,9 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
@@ -103,7 +101,7 @@ public class MainActivity extends Activity implements OnComponentAddedCompletedL
 		if(requestCode == FETCH) {
 			if(resultCode == ImportActivity.FETCH_SUCCESS) {
 				String html = data.getStringExtra("html");
-				ParseUtil util = new ParseUtil();
+				ParseHelper util = new ParseHelper();
 				lessons = util.parseLesson(html);
 				timetable.addLessons(lessons);
 				try {
